@@ -1,0 +1,105 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles/index.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+		<title>Todo List</title>
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="nav-container">
+				<a href="/" class="brand">
+					<i class="fas fa-check-circle"></i>
+					Todo List
+				</a>
+				<div class="nav-links">
+					<a href="/todos" class="nav-item">
+						<i class="fas fa-tasks"></i>
+						My Tasks
+					</a>
+					<a href="/about" class="nav-item">
+						<i class="fas fa-info-circle"></i>
+						About
+					</a>
+					<a href="/login" class="login-btn">
+						<i class="fas fa-sign-in-alt"></i>
+						Login
+					</a>
+				</div>
+				<div class="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<div class="hero">
+			<div class="hero-content">
+				<h1>Organize your tasks with ease</h1>
+				<p>A simple and efficient way to manage your daily tasks and boost your productivity.</p>
+				<div class="hero-buttons">
+					<a href="/signup" class="btn btn-primary">
+						Get Started
+						<i class="fas fa-arrow-right"></i>
+					</a>
+					<a href="/demo" class="btn btn-secondary">
+						See Demo
+						<i class="fas fa-play"></i>
+					</a>
+				</div>
+			</div>
+			<div class="hero-image">
+				<img src="/images/task-management.svg" alt="Task Management Illustration" />
+			</div>
+		</div>
+
+		<!-- Features Section -->
+		<div class="features">
+			<div class="container">
+				<h2>Why choose our Todo List app?</h2>
+				<div class="feature-cards">
+					<div class="feature-card">
+						<div class="feature-icon">
+							<i class="fas fa-check-double"></i>
+						</div>
+						<h3>Stay Organized</h3>
+						<p>Keep track of all your tasks in one place and never miss a deadline.</p>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">
+							<i class="fas fa-bell"></i>
+						</div>
+						<h3>Set Reminders</h3>
+						<p>Get notifications for upcoming tasks and important deadlines.</p>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">
+							<i class="fas fa-mobile-alt"></i>
+						</div>
+						<h3>Access Anywhere</h3>
+						<p>Use our app on any device - desktop, tablet, or mobile phone.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Call to Action -->
+		<!-- <div class="cta-section">
+			<div class="container">
+				<h2>Ready to get organized?</h2>
+				<p>Join thousands of users who have improved their productivity with our Todo List app.</p>
+				<a href="/signup" class="btn btn-primary">Create Free Account</a>
+			</div>
+		</div> -->
+
+		<%- include('partials/footer') %>
+		<script src="/js/script.js"></script>
+	</body>
+</html>

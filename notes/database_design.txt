@@ -1,0 +1,37 @@
+┌───────────────┐       ┌───────────────┐       ┌───────────────┐
+│     USERS     │       │  CATEGORIES   │       │     TASKS     │
+├───────────────┤       ├───────────────┤       ├───────────────┤
+│ id (PK)       │       │ id (PK)       │       │ id (PK)       │
+│ name          │       │ user_id (FK)  │◄──────┤ user_id (FK)  │
+│ email (UQ)    │       │ name          │       │ category_id(FK)│
+│ password      │       │ color         │       │ title         │
+│ created_at    │       │ created_at    │       │ description   │
+│ updated_at    │       │ updated_at    │       │ due_date      │
+└───────┬───────┘       └───────┬───────┘       │ priority      │
+        │                       │               │ status        │
+        │                       │               │ created_at    │
+        │                       │               │ updated_at    │
+        │                       │               └───────┬───────┘
+        │                       │                       │
+        │                       │                       │
+        │               ┌───────▼───────┐       ┌───────▼───────┐
+        │               │   SUBTASKS    │       │   REMINDERS   │
+        │               ├───────────────┤       ├───────────────┤
+        │               │ id (PK)       │       │ id (PK)       │
+        │               │ task_id (FK)  │       │ task_id (FK)  │
+        │               │ title         │       │ reminder_time │
+        │               │ completed     │       │ sent          │
+        │               │ created_at    │       │ created_at    │
+        │               │ updated_at    │       └───────────────┘
+        │               └───────────────┘
+        │
+┌───────▼───────┐       ┌───────────────┐
+│ USER_SETTINGS │       │ ACTIVITY_LOG  │
+├───────────────┤       ├───────────────┤
+│ user_id (PK,FK)│      │ id (PK)       │
+│ notif_enabled │       │ user_id (FK)  │
+│ theme         │       │ action        │
+│ default_view  │       │ entity_type   │
+│ updated_at    │       │ entity_id     │
+└───────────────┘       │ created_at    │
+                        └───────────────┘

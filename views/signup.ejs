@@ -1,0 +1,144 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles/index.css" />
+		<link rel="stylesheet" href="/styles/auth.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+		<title>Sign Up - Todo List</title>
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="nav-container">
+				<a href="/" class="brand">
+					<i class="fas fa-check-circle"></i>
+					Todo List
+				</a>
+				<div class="nav-links">
+					<a href="/todos" class="nav-item">
+						<i class="fas fa-tasks"></i>
+						My Tasks
+					</a>
+					<a href="/about" class="nav-item">
+						<i class="fas fa-info-circle"></i>
+						About
+					</a>
+					<a href="/login" class="login-btn">
+						<i class="fas fa-sign-in-alt"></i>
+						Login
+					</a>
+				</div>
+				<div class="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</nav>
+
+		<div class="auth-container">
+			<div class="auth-card">
+				<div class="auth-header">
+					<h1>Create Account</h1>
+					<p>Get started with your free account</p>
+				</div>
+
+				<% if (typeof error !== 'undefined' && error) { %>
+				<div class="alert alert-danger">
+					<i class="fas fa-exclamation-circle"></i>
+					<span><%= error %></span>
+				</div>
+				<% } %>
+
+				<form action="/signup" method="POST" class="auth-form">
+					<div class="form-group">
+						<label for="name">Full Name</label>
+						<div class="input-with-icon">
+							<i class="fas fa-user"></i>
+							<input type="text" id="name" name="name" placeholder="Enter your name" required />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="email">Email</label>
+						<div class="input-with-icon">
+							<i class="fas fa-envelope"></i>
+							<input type="email" id="email" name="email" placeholder="Enter your email" required />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="password">Password</label>
+						<div class="input-with-icon">
+							<i class="fas fa-lock"></i>
+							<input type="password" id="password" name="password" placeholder="Create a password" required minlength="8" />
+							<i class="fas fa-eye toggle-password"></i>
+						</div>
+						<div class="password-strength">
+							<div class="strength-meter">
+								<div class="meter-fill" id="password-meter"></div>
+							</div>
+							<span class="strength-text" id="password-strength">Password strength</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="confirm-password">Confirm Password</label>
+						<div class="input-with-icon">
+							<i class="fas fa-lock"></i>
+							<input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm your password" required />
+							<i class="fas fa-eye toggle-password"></i>
+						</div>
+					</div>
+
+					<div class="form-group terms-checkbox">
+						<div class="checkbox-container">
+							<input type="checkbox" id="terms" name="terms" required />
+							<label for="terms">
+								I agree to the
+								<a href="/terms">Terms of Service</a>
+								and
+								<a href="/privacy">Privacy Policy</a>
+							</label>
+						</div>
+					</div>
+
+					<button type="submit" class="auth-btn">
+						Create Account
+						<i class="fas fa-arrow-right"></i>
+					</button>
+				</form>
+
+				<div class="social-auth">
+					<p>Or sign up with</p>
+					<div class="social-buttons">
+						<button class="social-btn google">
+							<i class="fab fa-google"></i>
+							Google
+						</button>
+						<button class="social-btn facebook">
+							<i class="fab fa-facebook-f"></i>
+							Facebook
+						</button>
+					</div>
+				</div>
+
+				<div class="auth-footer">
+					<p>
+						Already have an account?
+						<a href="/login">Log in</a>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<%- include('partials/footer') %>
+
+		<script src="/js/script.js"></script>
+		<script src="/js/auth.js"></script>
+	</body>
+</html>

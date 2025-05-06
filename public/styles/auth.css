@@ -1,0 +1,297 @@
+/** @format */
+
+/* Auth Page Styles */
+.auth-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 3rem 1rem;
+	min-height: 80vh;
+}
+
+.auth-card {
+	background-color: white;
+	border-radius: 12px;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 500px;
+	padding: 2.5rem;
+}
+
+.auth-header {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+	font-size: 2rem;
+	color: #333;
+	margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+	color: #666;
+	font-size: 1rem;
+}
+
+/* Form Elements */
+.auth-form {
+	margin-bottom: 1.5rem;
+}
+
+.form-group {
+	margin-bottom: 1.5rem;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	color: #444;
+	font-size: 0.95rem;
+}
+
+.input-with-icon {
+	position: relative;
+}
+
+.input-with-icon i:not(.toggle-password) {
+	position: absolute;
+	left: 15px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #3a86ff;
+}
+
+.input-with-icon input {
+	width: 100%;
+	padding: 12px 40px 12px 40px;
+	border: 1px solid #ddd;
+	border-radius: 50px;
+	font-size: 1rem;
+	outline: none;
+	transition: border-color 0.3s;
+	font-family: "Poppins", sans-serif;
+}
+
+.input-with-icon input:focus {
+	border-color: #3a86ff;
+	box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.15);
+}
+
+.toggle-password {
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #666;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+.toggle-password:hover {
+	color: #3a86ff;
+}
+
+.password-label {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5rem;
+}
+
+.forgot-password {
+	color: #3a86ff;
+	font-size: 0.9rem;
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.3s;
+}
+
+.forgot-password:hover {
+	color: #2667cc;
+	text-decoration: underline;
+}
+
+/* Checkbox styling */
+.checkbox-container {
+	display: flex;
+	align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	margin-right: 10px;
+	accent-color: #3a86ff;
+}
+
+.checkbox-container label {
+	margin-bottom: 0;
+	font-weight: 400;
+	color: #555;
+}
+
+.checkbox-container a {
+	color: #3a86ff;
+	text-decoration: none;
+}
+
+.checkbox-container a:hover {
+	text-decoration: underline;
+}
+
+/* Submit button */
+.auth-btn {
+	width: 100%;
+	padding: 14px;
+	background-color: #3a86ff;
+	color: white;
+	border: none;
+	border-radius: 50px;
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	font-family: "Poppins", sans-serif;
+}
+
+.auth-btn:hover {
+	background-color: #2667cc;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(58, 134, 255, 0.3);
+}
+
+/* Social login */
+.social-auth {
+	text-align: center;
+	margin-bottom: 1.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid #eee;
+}
+
+.social-auth p {
+	color: #666;
+	margin-bottom: 1rem;
+	font-size: 0.9rem;
+	position: relative;
+}
+
+.social-buttons {
+	display: flex;
+	gap: 1rem;
+}
+
+.social-btn {
+	flex: 1;
+	padding: 10px;
+	border-radius: 50px;
+	border: 1px solid #ddd;
+	background-color: white;
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-family: "Poppins", sans-serif;
+}
+
+.social-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn.google:hover {
+	border-color: #db4437;
+	color: #db4437;
+}
+
+.social-btn.facebook:hover {
+	border-color: #4267b2;
+	color: #4267b2;
+}
+
+/* Auth footer */
+.auth-footer {
+	text-align: center;
+	margin-top: 1rem;
+}
+
+.auth-footer p {
+	font-size: 0.9rem;
+	color: #666;
+}
+
+.auth-footer a {
+	color: #3a86ff;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.auth-footer a:hover {
+	text-decoration: underline;
+}
+
+/* Alert messages */
+.alert {
+	padding: 12px 16px;
+	margin-bottom: 1.5rem;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.alert-danger {
+	background-color: #ffeaea;
+	color: #d83232;
+	border-left: 4px solid #d83232;
+}
+
+.alert i {
+	font-size: 1.1rem;
+}
+
+/* Password strength meter */
+.password-strength {
+	margin-top: 8px;
+}
+
+.strength-meter {
+	height: 4px;
+	background-color: #eee;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.meter-fill {
+	height: 100%;
+	width: 0%;
+	border-radius: 2px;
+	transition: width 0.3s, background-color 0.3s;
+}
+
+.strength-text {
+	font-size: 0.8rem;
+	color: #888;
+	display: inline-block;
+	margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+	.auth-card {
+		padding: 1.5rem;
+	}
+
+	.social-buttons {
+		flex-direction: column;
+	}
+}

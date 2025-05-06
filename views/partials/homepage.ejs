@@ -1,0 +1,180 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles/index.css" />
+		<link rel="stylesheet" href="/styles/homepage.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+		<title>Dashboard - Todo List</title>
+	</head>
+	<body>
+		<!-- Navbar with user menu -->
+		<nav class="navbar">
+			<div class="nav-container">
+				<a href="/dashboard" class="brand">
+					<i class="fas fa-check-circle"></i>
+					Todo List
+				</a>
+				<div class="nav-links">
+					<a href="/todos" class="nav-item">
+						<i class="fas fa-tasks"></i>
+						My Tasks
+					</a>
+					<a href="/categories" class="nav-item">
+						<i class="fas fa-tag"></i>
+						Categories
+					</a>
+					<div class="user-menu">
+						<button class="user-menu-btn">
+							<div class="user-avatar">
+								<span><%= user.name.charAt(0).toUpperCase() %></span>
+							</div>
+							<span class="user-name"><%= user.name %></span>
+							<i class="fas fa-chevron-down"></i>
+						</button>
+						<div class="user-dropdown">
+							<a href="/profile">
+								<i class="fas fa-user"></i>
+								Profile
+							</a>
+							<a href="/settings">
+								<i class="fas fa-cog"></i>
+								Settings
+							</a>
+							<div class="dropdown-divider"></div>
+							<a href="/logout" class="logout-link">
+								<i class="fas fa-sign-out-alt"></i>
+								Logout
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Main Content -->
+		<div class="dashboard-container">
+			<!-- Welcome Header Section -->
+			<div class="welcome-section">
+				<div class="welcome-message">
+					<h1>Welcome back, <%= user.name %>!</h1>
+					<p class="date-today"><%= new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+				</div>
+				<div class="quick-actions">
+					<button class="add-task-btn">
+						<i class="fas fa-plus"></i>
+						Add New Task
+					</button>
+				</div>
+			</div>
+
+			<!-- Stats Overview -->
+			<div class="stats-row">
+				<div class="stat-card pending">
+					<div class="stat-icon">
+						<i class="fas fa-hourglass-half"></i>
+					</div>
+					<h3 class="stat-value">0</h3>
+					<p class="stat-label">Pending</p>
+				</div>
+				<div class="stat-card active">
+					<div class="stat-icon">
+						<i class="fas fa-spinner"></i>
+					</div>
+					<h3 class="stat-value">0</h3>
+					<p class="stat-label">In Progress</p>
+				</div>
+				<div class="stat-card completed">
+					<div class="stat-icon">
+						<i class="fas fa-check"></i>
+					</div>
+					<h3 class="stat-value">0</h3>
+					<p class="stat-label">Completed</p>
+				</div>
+				<div class="stat-card all">
+					<div class="stat-icon">
+						<i class="fas fa-tasks"></i>
+					</div>
+					<h3 class="stat-value">0</h3>
+					<p class="stat-label">Total Tasks</p>
+				</div>
+			</div>
+
+			<!-- Dashboard Content -->
+			<div class="dashboard-content">
+				<div class="dashboard-card">
+					<h2>
+						<i class="far fa-calendar-check"></i>
+						Today's Tasks
+					</h2>
+					<p>Your scheduled tasks for today</p>
+					<div class="task-card">
+						<div class="task-content">
+							<h3>No Tasks Today</h3>
+							<p>You don't have any tasks scheduled for today. Time to create one!</p>
+							<button class="action-button">Add Task</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="dashboard-card">
+					<h2>
+						<i class="far fa-calendar-alt"></i>
+						Upcoming Tasks
+					</h2>
+					<p>Your tasks for the upcoming days</p>
+					<div class="task-card">
+						<div class="task-content">
+							<h3>Plan Ahead</h3>
+							<p>No upcoming tasks found. Start planning your week by adding tasks.</p>
+							<button class="action-button">Schedule Task</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Empty State for when there are no tasks at all -->
+			<div class="empty-state">
+				<img src="https://cdn-icons-png.flaticon.com/512/6194/6194029.png" alt="No tasks" class="task-illustration" />
+				<h3 class="empty-title">Your task list is empty</h3>
+				<p class="empty-text">Start by adding your first task. Organize your work and life in minutes with Todo List.</p>
+				<button class="add-task-btn">
+					<i class="fas fa-plus"></i>
+					Create Your First Task
+				</button>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				// Toggle mobile menu
+				const hamburger = document.querySelector(".hamburger");
+				const navLinks = document.querySelector(".nav-links");
+
+				if (hamburger) {
+					hamburger.addEventListener("click", function () {
+						navLinks.classList.toggle("active");
+					});
+				}
+
+				// Task buttons functionality
+				const addTaskButtons = document.querySelectorAll(".add-task-btn, .action-button");
+
+				addTaskButtons.forEach((button) => {
+					button.addEventListener("click", function () {
+						alert("Add task functionality will be implemented soon!");
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
