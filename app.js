@@ -53,10 +53,8 @@ db.connect();
 // Update the root route to check authentication
 app.get("/", (req, res) => {
 	if (req.isAuthenticated()) {
-		// If user is already logged in, redirect to homepage
 		res.redirect("/homepage");
 	} else {
-		// Otherwise show the public landing page
 		res.render("index.ejs");
 	}
 });
