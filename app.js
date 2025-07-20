@@ -159,20 +159,20 @@ passport.use(
 					const user = result.rows[0];
 					const storedHashedPassword = user.password;
 
-					console.log("User login attempt:", user.name, "using local authentication");
+					console.log("Success User Login: ", user.name, "using local authentication");
 
 					bcrypt.compare(password, storedHashedPassword, (err, isMatch) => {
 						if (err) {
 							console.log("Error comparing passwords:", err);
 							return cb(err);
 						} else {
-							console.log(`Password match result: ${isMatch}`);
+							// Check if passwords match
 							if (isMatch) {
 								// Passwords match
 								return cb(null, user);
 							} else {
 								// Passwords do not match
-								return cb(null, false, {message: "Incorrect password"});
+								return cb(null, false);
 							}
 						}
 					});
@@ -200,7 +200,7 @@ passport.use("google", new GoogleStrategy({
 		const email = profile.emails[0].value;
 		const name = profile.displayName;
 
-		console.log("User login from: ", name, "using google oauth");
+		console.log("Success User Login: ", name, "using google oauth");
 
 		const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
@@ -237,7 +237,7 @@ passport.use("facebook", new FacebookStrategy({
             : `fb_${profile.id}@facebook.user`;
         const name = profile.displayName;
 
-        console.log("User login from: ", name, "using facebook oauth");
+        console.log("Success User Login: ", name, "using facebook oauth");
 
         const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
