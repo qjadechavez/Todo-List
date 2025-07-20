@@ -7,6 +7,7 @@ import session from "express-session";
 import passport from "passport";
 import {Strategy} from "passport-local";
 import {Strategy as GoogleStrategy} from "passport-google-oauth20";
+import {Strategy as FacebookStrategy} from "passport-facebook";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 
@@ -98,6 +99,13 @@ app.get("/auth/google/homepage", passport.authenticate("google", {
 	})
 );
 
+app.get("/auth/facebook", passport.authenticate("facebook"));
+
+app.get("/auth/facebook/homepage", passport.authenticate("facebook", {
+	successRedirect: "/homepage",
+	failureRedirect: "/login",
+}));
+
 // Update the login route to use passport
 app.post(
 	"/login",
@@ -146,20 +154,20 @@ passport.use(
 		async function verify(email, password, cb) {
 			try {
 				const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-				console.log(`Login attempt for email: ${email}`);
-				console.log(`User found: ${result.rows.length > 0}`);
 
 				if (result.rows.length > 0) {
 					const user = result.rows[0];
 					const storedHashedPassword = user.password;
 
-					bcrypt.compare(password, storedHashedPassword, (err, result) => {
+					console.log("User login attempt:", user.name, "using local authentication");
+
+					bcrypt.compare(password, storedHashedPassword, (err, isMatch) => {
 						if (err) {
 							console.log("Error comparing passwords:", err);
 							return cb(err);
 						} else {
-							console.log(`Password match result: ${result}`);
-							if (result) {
+							console.log(`Password match result: ${isMatch}`);
+							if (isMatch) {
 								// Passwords match
 								return cb(null, user);
 							} else {
@@ -192,8 +200,7 @@ passport.use("google", new GoogleStrategy({
 		const email = profile.emails[0].value;
 		const name = profile.displayName;
 
-		// console.log("Email:", email);
-		// console.log("Name:", name);
+		console.log("User login from: ", name, "using google oauth");
 
 		const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
@@ -213,6 +220,42 @@ passport.use("google", new GoogleStrategy({
 	}
 
 }))
+
+passport.use("facebook", new FacebookStrategy({
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/homepage",
+    profileFields: ['id', 'displayName', 'email']
+}, async (accessToken, refreshToken, profile, cb) => {
+	
+    // console.log("Facebook Profile:", profile);
+
+    try {
+        // Check if profile has email, otherwise use Facebook ID as email
+        const email = profile.emails && profile.emails[0] 
+            ? profile.emails[0].value 
+            : `fb_${profile.id}@facebook.user`;
+        const name = profile.displayName;
+
+        console.log("User login from: ", name, "using facebook oauth");
+
+        const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+
+        if (result.rows.length === 0) {
+            const newUser = await pool.query(
+                "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *", 
+                [name, email, "facebook-oauth"]
+            );
+            return cb(null, newUser.rows[0]);
+        } else {
+            return cb(null, result.rows[0]);
+        }
+
+    } catch (error) {
+        console.log("Facebook OAuth error:", error);
+        return cb(error);
+    }
+}));
 
 passport.serializeUser((user, cb) => {
 	cb(null, user.id);
