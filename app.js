@@ -10,6 +10,7 @@ import {Strategy as GoogleStrategy} from "passport-google-oauth20";
 import {Strategy as FacebookStrategy} from "passport-facebook";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import validator from 'validator';
 
 // Load environment variables
 dotenv.config();
@@ -150,6 +151,12 @@ app.post("/signup", async (req, res) => {
     if (password.length < 6) {
         return res.render("signup", { error: "Password must be at least 6 characters" });
     }
+
+    if (!validator.isEmail(email)) {
+        return res.render("signup", { error: "Please enter a valid email address" });
+    }
+
+    const sanitizedName = validator.escape(name.trim());
 
     try {
         const checkResult = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
