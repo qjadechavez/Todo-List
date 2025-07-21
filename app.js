@@ -166,14 +166,21 @@ app.post("/signup", async (req, res) => {
     }
 });
 
-app.get("/logout", (req, res) => {
-	req.logout(function (err) {
-		if (err) {
-			console.log(err);
-			return next(err);
-		}
-		res.redirect("/");
-	});
+app.get("/logout", (req, res, next) => {
+    req.logout(function (err) {
+        if (err) {
+            console.error('Logout error:', err);
+            return next(err);
+        }
+        req.session.destroy((err) => {
+            if (err) {
+                console.error('Session destroy error:', err);
+                return next(err);
+            }
+            res.clearCookie('connect.sid');
+            res.redirect("/");
+        });
+    });
 });
 
 // Set up the passport strategy
