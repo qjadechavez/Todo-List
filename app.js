@@ -241,7 +241,7 @@ passport.use("google", new GoogleStrategy({
 	callbackURL: "http://localhost:3000/auth/google/homepage",
 	userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
 }, async (accessToken, refreshToken, profile, cb) => {
-	console.log("Email:", profile.emails[0].value);
+	// console.log("Email:", profile.emails[0].value);
 
 	try {
 		// Direct access to profile properties
