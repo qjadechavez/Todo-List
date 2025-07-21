@@ -14,6 +14,20 @@ import dotenv from "dotenv";
 // Load environment variables
 dotenv.config();
 
+// Validate required environment variables
+const requiredEnvVars = [
+    'DB_USER', 'DB_HOST', 'DB_NAME', 'DB_PASSWORD', 'DB_PORT',
+    'SESSION_SECRET', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET',
+    'FACEBOOK_APP_ID', 'FACEBOOK_APP_SECRET'
+];
+
+requiredEnvVars.forEach(envVar => {
+    if (!process.env[envVar]) {
+        console.error(`Missing required environment variable: ${envVar}`);
+        process.exit(1);
+    }
+});
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -53,8 +67,7 @@ const pool = new Pool({
     max: 20,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
-	ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-
+	
 });
 
 // Connection testing 
@@ -127,20 +140,29 @@ app.post(
 );
 
 app.post("/signup", async (req, res) => {
-    const {name, email, password} = req.body;
+    const { name, email, password } = req.body;
+
+    // Basic validation
+    if (!name || !email || !password) {
+        return res.render("signup", { error: "All fields are required" });
+    }
+
+    if (password.length < 6) {
+        return res.render("signup", { error: "Password must be at least 6 characters" });
+    }
 
     try {
         const checkResult = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         if (checkResult.rows.length > 0) {
-            return res.render("signup", {error: "User already exists with this email"});
+            return res.render("signup", { error: "User already exists with this email" });
         }
 
         const hash = await bcrypt.hash(password, saltRounds);
         await pool.query("INSERT INTO users (name, email, password) VALUES ($1, $2, $3)", [name, email, hash]);
-        res.render("login", {success: "Account created successfully! Please log in."});
+        res.render("login", { success: "Account created successfully! Please log in." });
     } catch (error) {
         console.error("Signup error:", error);
-        res.render("signup", {error: "Something went wrong. Please try again."});
+        res.render("signup", { error: "Something went wrong. Please try again." });
     }
 });
 
