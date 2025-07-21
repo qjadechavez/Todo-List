@@ -53,15 +53,26 @@ const pool = new Pool({
     max: 20,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
+	ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+
 });
 
-// Test the connection
-pool.on('connect', () => {
-    console.log('Connected to the database');
-});
+// Connection testing 
+const testConnection = async () => {
+    try {
+        const client = await pool.connect();
+        console.log('✓ Database connected successfully');
+        client.release();
+    } catch (err) {
+        console.error('✗ Database connection failed:', err.message);
+        process.exit(1);
+    }
+};
+
+testConnection();
 
 pool.on('error', (err) => {
-    console.error('Database connection error:', err);
+    console.error('Unexpected database error:', err);
 });
 
 // Update the root route to check authentication
