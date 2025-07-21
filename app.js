@@ -184,6 +184,7 @@ app.get("/logout", (req, res, next) => {
                 console.error('Session destroy error:', err);
                 return next(err);
             }
+			console.log("User logged out successfully");
             res.clearCookie('connect.sid');
             res.redirect("/");
         });
