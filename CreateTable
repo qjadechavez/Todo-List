@@ -1,4 +1,4 @@
--- Create users table (exactly what your app.js expects)
+-- Create users table
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -70,7 +70,6 @@ CREATE TABLE activity_log (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create indexes for better performance
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_tasks_user_id ON tasks(user_id);
 CREATE INDEX idx_tasks_status ON tasks(status);
